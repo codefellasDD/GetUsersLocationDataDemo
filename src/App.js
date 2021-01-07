@@ -39,17 +39,21 @@ export default class App extends Component {
   }
 
   async getLocation() {
-    let position = await Geolocation.getCurrentPosition();
+    try {
+      let position = await Geolocation.getCurrentPosition();
 
-    this.setState(
-      {
-        lat: position.coords.latitude,
-        lng: position.coords.longitude
-      },
-      () => {
-        console.log(this.state.lat);
-      }
-    );
+      this.setState(
+        {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        },
+        () => {
+          console.log(position.coords.latitude);
+        }
+      );
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   render() {

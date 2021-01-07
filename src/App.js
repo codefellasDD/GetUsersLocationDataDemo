@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Geolocation, Geoposition  }  from "@ionic-native/geolocation";
+import { Geolocation, Geoposition } from "@ionic-native/geolocation";
 import axios from "axios";
 
 export default class App extends Component {
@@ -41,15 +41,15 @@ export default class App extends Component {
   async getLocation() {
     let position = await Geolocation.getCurrentPosition();
 
-      this.setState(
-        {
-          lat: 12,
-          lng: 12
-        },
-        () => {
-          console.log(this.state.lat);
-        }
-      );
+    this.setState(
+      {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+      },
+      () => {
+        console.log(this.state.lat);
+      }
+    );
   }
 
   // async getLocation() {
@@ -74,10 +74,10 @@ export default class App extends Component {
     //const { users } = this.state;
     return (
       <div className="App">
-         <p className="card-text">
-            <small className="text-muted">
-                Position: {this.state.lat} {this.state.lng}
-            </small>
+        <p className="card-text">
+          <small className="text-muted">
+            Position: {this.state.lat} {this.state.lng}
+          </small>
         </p>
         {/* {users &&
           users.map((user) => {

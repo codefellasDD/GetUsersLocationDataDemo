@@ -5,38 +5,38 @@ import axios from "axios";
 export default class App extends Component {
   constructor() {
     super();
-    //this.getUser = this.getUser.bind(this);
+    this.getUser = this.getUser.bind(this);
     this.getLocation = this.getLocation.bind(this);
     this.state = {
-      //users: [],
+      users: [],
       lat: String,
       lng: String
     };
   }
 
   componentDidMount() {
-    //this.getUser();
+    this.getUser();
     this.getLocation();
   }
 
-  // async getUser() {
-  //   let usersData = await axios
-  //     .get("https://reqres.in/api/users?page=2")
-  //     .then((res) => {
-  //       return res.data.data;
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  //   this.setState(
-  //     {
-  //       users: usersData
-  //     },
-  //     () => {
-  //       console.log(this.state);
-  //     }
-  //   );
-  // }
+  async getUser() {
+    let usersData = await axios
+      .get("https://reqres.in/api/users?page=2")
+      .then((res) => {
+        return res.data.data;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    this.setState(
+      {
+        users: usersData
+      },
+      () => {
+        console.log(this.state);
+      }
+    );
+  }
 
   async getLocation() {
     let position = await Geolocation.getCurrentPosition();
@@ -52,34 +52,11 @@ export default class App extends Component {
     );
   }
 
-  // async getLocation() {
-  //   try {
-  //     let position = await Geolocation.getCurrentPosition();
-
-  //     this.setState(
-  //       {
-  //         lat: position.coords.latitude,
-  //         lng: position.coords.longitude
-  //       },
-  //       () => {
-  //         console.log(this.state.lat);
-  //       }
-  //     );
-  //   } catch (e) {
-  //     console.log(e);
-  //   }
-  // }
-
   render() {
-    //const { users } = this.state;
+    const { users } = this.state;
     return (
       <div className="App">
-        <p className="card-text">
-          <small className="text-muted">
-            Position: {this.state.lat} {this.state.lng}
-          </small>
-        </p>
-        {/* {users &&
+        {users &&
           users.map((user) => {
             return (
               <div className="row row-cols-1 row-cols-md-2">
@@ -110,7 +87,7 @@ export default class App extends Component {
                 </div>
               </div>
             );
-          })} */}
+          })}
       </div>
     );
   }
